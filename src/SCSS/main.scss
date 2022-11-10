@@ -1,0 +1,6 @@
+@use "styles/style" as *;
+@use "styles/inputsAndButtons" as *;
+/* ADD just below - Above mediaQuery */
+
+@use "mediaQueries/mediaQuery" as *;
+/* LAST STYLESHEET SHOULD BE mediaQuery */

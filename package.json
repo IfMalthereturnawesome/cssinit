@@ -1,0 +1,21 @@
+{
+  "name": "cssinit",
+  "version": "1.0.0",
+  "description": "Not just another CSS framework, but a CSS framework that is easy to use and customize.",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html --open",
+    "build": "parcel build /src/index.html",
+    "watch": "parcel watch src/index.html"
+  },
+  "keywords": ["css", "framework", "css framework", "cssinit","cssinit framework","scss","sass","auto grid","scss init","responsive framework"],
+  "author": "IfMalthereturnawesome",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.7.0",
+    "sass": "^1.56.0"
+  },
+  "dependencies": {
+    "parcel": "^2.7.0"
+  }
+}

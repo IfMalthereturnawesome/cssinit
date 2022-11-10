@@ -1,0 +1,198 @@
+@use "../abstract/second-global" as *;
+@use "../abstract/global" as *;
+@use "../abstract/other-global" as *;
+@import "../abstract/scss-variables";
+
+
+// mixin color contrast for background and text with button and link styles included
+@mixin background($contrast: "primary") {
+  @if $contrast == "primary" {
+    background-color: var(--primary);
+    color: var(--white);
+    // Make the button background color different color
+    &__link,
+    &__button {
+      background-color: var(--secondary);
+      color: var(--secondary-ultra-light);
+    }
+  } @else if $contrast == "black" {
+    background-color: var(--black);
+    color: var(--white);
+    &__link,
+    &__button {
+      background-color: var(--white);
+    }
+  } @else if $contrast == "white" {
+    background-color: var(--white);
+    color: var(--black);
+    &__link,
+    &__button {
+      background-color: var(--black);
+      color: var(--white);
+    }
+  } @else if $contrast == "primary-dark" {
+    background-color: var(--primary-dark);
+    color: var(--white);
+    &__link,
+    &__button {
+      background-color: var(--secondary-dark);
+      color: var(--white);
+    }
+  } @else if $contrast == "primary-ultra-dark" {
+    background-color: var(--primary-ultra-dark);
+    color: var(--white);
+    &__link,
+    &__button {
+      background-color: var(--secondary-ultra-dark);
+      color: var(--white);
+    }
+  } @else if $contrast == "primary-ultra-light" {
+    background-color: var(--primary-ultra-light);
+    color: var(--black);
+    &__link,
+    &__button {
+      background-color: var(--primary-ultra-dark);
+      color: var(--white);
+    }
+  } @else if $contrast == "secondary" {
+    background-color: var(--secondary);
+    color: var(--white);
+    &__link,
+    &__button,
+    &:hover {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+  } @else if $contrast == "secondary-dark" {
+    background-color: var(--secondary-dark);
+    color: var(--white);
+    &__link,
+    &__button {
+      background-color: var(--primary-ultra-light);
+      color: var(--black);
+    }
+  } @else if $contrast == "secondary-light" {
+    background-color: var(--secondary-light);
+    color: var(--black);
+    &__link,
+    &__button {
+      background-color: var(--secondary-dark);
+      color: var(--white);
+    }
+  } @else if $contrast == "secondary-ultra-dark" {
+    background-color: var(--secondary-ultra-dark);
+    color: var(--white);
+    &__link,
+    &__button {
+      background-color: var(--primary-ultra-light);
+      color: var(--black);
+    }
+  } @else if $contrast == "secondary-ultra-light" {
+    background-color: var(--secondary-ultra-light);
+    color: var(--black);
+    &__link,
+    &__button {
+      background-color: var(--secondary-ultra-dark);
+      color: var(--white);
+    }
+  } @else if $contrast == "accent" {
+    background-color: var(--accent);
+    color: var(--white);
+    &__link,
+    &__button {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+  } @else if $contrast == "accent-dark" {
+    background-color: var(--accent-dark);
+    color: var(--white);
+    &__link,
+    &__button {
+      background-color: var(--secondary-light);
+      color: var(--black);
+    }
+  } @else if $contrast == "accent-light" {
+    background-color: var(--accent-light);
+    color: var(--black);
+    &__link,
+    &__button {
+      background-color: var(--accent-dark);
+      color: var(--white);
+    }
+  } @else if $contrast == "accent-ultra-dark" {
+    background-color: var(--accent-ultra-dark);
+    color: var(--white);
+    &__link,
+    &__button {
+      background-color: var(--accent-ultra-light);
+      color: var(--black);
+    }
+  } @else if $contrast == "accent-ultra-light" {
+    background-color: var(--accent-ultra-light);
+    color: var(--black);
+    &__link,
+    &__button {
+      background-color: var(--accent-ultra-dark);
+      color: var(--white);
+    }
+  }
+}
+
+
+@mixin center($direction: all) {
+  @if $direction==all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } @else if $direction==horizontal {
+    display: flex;
+    justify-content: center;
+  } @else if $direction==vertical {
+    display: flex;
+    align-items: center;
+  }
+}
+
+
+@mixin input-validation($input) {
+  @if $input == valid {
+    border: 1.5px solid var(--alert-green);
+    color: var(--shade);
+    background-color: rgb(232, 240, 254);
+  } @else if $input == invalid {
+    border: 1.5px solid var(--alert-red);
+    color: var(--alert-red);
+    background-color: #f2dede;
+  } @else {
+    border-style: none;
+    background-color: var(--white);
+  }
+}
+
+/*  BREAKPOINTS */
+
+$breakpoints: (
+        small: 480px,
+        medium: 768px,
+        large: 992px,
+        wide: 1280px,
+);
+@mixin breakpoint-to($name) {
+  @if not map-has-key($breakpoints, $name) {
+    @warn "Warning: `#{$name}` is not a valid breakpoint name.";
+  } @else {
+    @media (max-width: map-get($breakpoints, $name)) {
+      @content;
+    }
+  }
+}
+
+@mixin mf-breakpoint-from($name) {
+  @if not map-has-key($breakpoints, $name) {
+    @warn "Warning: `#{$name}` is not a valid breakpoint name.";
+  } @else {
+    @media (min-width: map-get($breakpoints, $name)) {
+      @content;
+    }
+  }
+}
