@@ -5,10 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html --open",
-    "build": "parcel build /src/index.html",
-    "watch": "parcel watch src/index.html",
-    "prepublishOnly": "npm run build && cp -r ./lib/* . && rm -rf ./lib",
-    "postpublish": "git clean -fd"
+    "build": "parcel build /src/index.html"
   },
   "keywords": ["css", "framework", "css framework", "cssinit","cssinit framework","scss","sass","auto grid","scss init","responsive framework"],
   "author": "IfMalthereturnawesome",
