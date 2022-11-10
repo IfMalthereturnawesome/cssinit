@@ -1,6 +1,6 @@
 {
-  "name": "cssinit",
-  "version": "1.0.0",
+  "name": "scssinit",
+  "version": "1.0.2",
   "description": "Not just another CSS framework, but a CSS framework that is easy to use and customize.",
   "main": "index.js",
   "scripts": {
@@ -12,10 +12,11 @@
   "author": "IfMalthereturnawesome",
   "license": "ISC",
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.7.0",
-    "sass": "^1.56.0"
+    "@parcel/transformer-sass": "^2.7.0"
+
   },
   "dependencies": {
-    "parcel": "^2.7.0"
+    "parcel": "^2.7.0",
+    "sass": "^1.56.0"
   }
 }
