@@ -1,8 +1,9 @@
-@use "../abstract/second-global" as *;
-@use "../abstract/global" as *;
-@use "../abstract/other-global" as *;
-@import "../abstract/scss-variables";
-@import "help-classes";
+@use "sass:math";
+@use "global-second" as *;
+@use "global" as *;
+
+@import "scss-variables";
+@import "helper-classes";
 
 
 @mixin center($direction: all) {
@@ -172,13 +173,12 @@
     @return default;
   }
   $color-brightness: round(
-                  (red($n) * 299) + (green($n) * 587) + (blue($n) * 114) / 1000
-  );
+    (red($n) * 299) + (green($n) * 587) + calc((blue($n) * 114) / 1000));
   $light-color: round(
-                  (red(#ffffff) * 299) + (green(#ffffff) * 587) + (blue(#ffffff) * 114) / 1000
+    (red(#ffffff) * 299) + (green(#ffffff) * 587) + calc((blue(#ffffff) * 114) / 1000)
   );
 
-  @if abs($color-brightness) < ($light-color/2) {
+  @if abs($color-brightness) < calc($light-color / 2) {
     @return #ffffff;
   } @else {
     @return #00000f;
@@ -190,13 +190,12 @@
     @return #ffffff;
   }
   $color-brightness: round(
-                  (red($n) * 299) + (green($n) * 587) + (blue($n) * 114) / 1000
-  );
+    (red($n) * 299) + (green($n) * 587) + calc((blue($n) * 114) / 1000));
   $light-color: round(
-                  (red(#ffffff) * 299) + (green(#ffffff) * 587) + (blue(#ffffff) * 114) / 1000
+    (red(#ffffff) * 299) + (green(#ffffff) * 587) + calc((blue(#ffffff) * 114) / 1000)
   );
 
-  @if abs($color-brightness) < ($light-color/2) {
+  @if abs($color-brightness) < calc($light-color / 2) {
     @return #ffffff;
   } @else {
     @return #00000f;
@@ -329,10 +328,10 @@
 /*  BREAKPOINTS */
 
 $breakpoints: (
-        small: 480px,
-        medium: 768px,
-        large: 992px,
-        wide: 1280px,
+  small: 480px,
+  medium: 768px,
+  large: 992px,
+  wide: 1280px,
 );
 @mixin breakpoint-to($name) {
   @if not map-has-key($breakpoints, $name) {

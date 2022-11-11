@@ -1,7 +1,6 @@
-@use "../abstract/second-global" as *;
+@use "../abstract/global-second" as *;
 @use "../abstract/global" as *;
-@use "../abstract/other-global" as *;
-@import "../utilities/utils";
+@import "../abstract/utils";
 
 /* Utility mixin components  https://gerillass.com/*/
 
@@ -78,7 +77,7 @@ https://docs.gerillass.com/docs/background-image/
     @if $filter-color {
       @if length($filter-color) == 1 {
         background-image: linear-gradient(to top, $filter-color, $filter-color),
-        url($image-url);
+          url($image-url);
       } @else if length($filter-color) > 1 {
         $color-list: ();
         @for $i from 1 through length($filter-color) {
@@ -87,21 +86,21 @@ https://docs.gerillass.com/docs/background-image/
         @if $filter-direction {
           @if map-has-key($map-for-directions, $filter-direction) {
             background-image: linear-gradient(
-                            map-get($map-for-directions, $filter-direction),
-                            $color-list
-            ),
-            url($image-url);
+                map-get($map-for-directions, $filter-direction),
+                $color-list
+              ),
+              url($image-url);
           } @else {
             @if index("deg", unit($filter-direction)) {
               background-image: linear-gradient($filter-direction, $color-list),
-              url($image-url);
+                url($image-url);
             } @else {
               @error "#{$filter-direction} is a wrong value for the $filter-direction parameter. The value must be either a number followed by the 'deg' unit or one of the following pre-defined values: #{quote(map-keys($map-for-directions))}.";
             }
           }
         } @else {
           background-image: linear-gradient(to top, $color-list),
-          url($image-url);
+            url($image-url);
         }
       }
     } @else {
@@ -121,8 +120,8 @@ https://docs.gerillass.com/docs/background-image/
         background: $filter-color;
       } @else if length($filter-color) > 1 {
         @include gls-linear-gradient(
-                        if(not $filter-direction, "top", $filter-direction),
-                        $filter-color
+          if(not $filter-direction, "top", $filter-direction),
+          $filter-color
         );
       }
     }
@@ -199,9 +198,9 @@ https://docs.gerillass.com/docs/font-face/
       }
       @for $i from 1 through length($file-formats) {
         $list: append(
-                        $list,
-                        __fontSource($font-family, $file-path, nth($file-formats, $i)),
-                        comma
+          $list,
+          __fontSource($font-family, $file-path, nth($file-formats, $i)),
+          comma
         );
       }
       src: $list;
@@ -361,13 +360,13 @@ https://docs.gerillass.com/docs/only/  */
     $list: ();
     @for $i from 1 through length($params) {
       $list: append(
-                      $list,
-                      if(
-                                      nth($params, $i) < 0,
-                                      unquote("&:nth-last-of-type(#{nth($params, $i) * -1})"),
-                                      unquote("&:nth-of-type(#{nth($params, $i)})")
-                      ),
-                      comma
+        $list,
+        if(
+          nth($params, $i) < 0,
+          unquote("&:nth-last-of-type(#{nth($params, $i) * -1})"),
+          unquote("&:nth-of-type(#{nth($params, $i)})")
+        ),
+        comma
       );
     }
     #{$list} {
@@ -400,7 +399,7 @@ https://docs.gerillass.com/docs/loadify/ */
         animation-fill-mode: forwards;
       }
     } @else if
-    (length($params) == 1 and nth($params, 1) != "init") or
+      (length($params) == 1 and nth($params, 1) != "init") or
       (length($params) == 1 and type-of(nth($params, 1)) != "string")
     {
       @error "#{nth($params, 1)} is not a valid argument. Please pass `init` as an argument to initialize the effect or do not pass any argument at all.";
@@ -452,10 +451,10 @@ https://docs.gerillass.com/docs/position/
 @mixin position($position: absolute, $offsets: 0) {
   $offsets: __shorthandProperty($offsets);
   $positioning-offsets: (
-          top: nth($offsets, 1),
-          right: nth($offsets, 2),
-          bottom: nth($offsets, 3),
-          left: nth($offsets, 4),
+    top: nth($offsets, 1),
+    right: nth($offsets, 2),
+    bottom: nth($offsets, 3),
+    left: nth($offsets, 4),
   );
   position: $position;
   @each $offset, $value in $positioning-offsets {
@@ -517,26 +516,26 @@ https://docs.gerillass.com/docs/scissors/
   @if length($corners) == 1 {
     $corners: __validateScissors($corners);
     clip-path: polygon(
-                    0 #{nth($corners, 1)},
-                    #{nth($corners, 1)} 0,
-                    calc(100% - #{nth($corners, 1)}) 0,
-                    100% #{nth($corners, 1)},
-                    100% calc(100% - #{nth($corners, 1)}),
-                    calc(100% - #{nth($corners, 1)}) 100%,
-                    #{nth($corners, 1)} 100%,
-                    0 calc(100% - #{nth($corners, 1)})
+      0 #{nth($corners, 1)},
+      #{nth($corners, 1)} 0,
+      calc(100% - #{nth($corners, 1)}) 0,
+      100% #{nth($corners, 1)},
+      100% calc(100% - #{nth($corners, 1)}),
+      calc(100% - #{nth($corners, 1)}) 100%,
+      #{nth($corners, 1)} 100%,
+      0 calc(100% - #{nth($corners, 1)})
     );
   } @else if length($corners) == 4 {
     $corners: __validateScissors($corners);
     clip-path: polygon(
-                    0 #{nth($corners, 1)},
-                    #{nth($corners, 1)} 0,
-                    calc(100% - #{nth($corners, 2)}) 0,
-                    100% #{nth($corners, 2)},
-                    100% calc(100% - #{nth($corners, 3)}),
-                    calc(100% - #{nth($corners, 3)}) 100%,
-                    #{nth($corners, 4)} 100%,
-                    0 calc(100% - #{nth($corners, 4)})
+      0 #{nth($corners, 1)},
+      #{nth($corners, 1)} 0,
+      calc(100% - #{nth($corners, 2)}) 0,
+      100% #{nth($corners, 2)},
+      100% calc(100% - #{nth($corners, 3)}),
+      calc(100% - #{nth($corners, 3)}) 100%,
+      #{nth($corners, 4)} 100%,
+      0 calc(100% - #{nth($corners, 4)})
     );
   }
 }

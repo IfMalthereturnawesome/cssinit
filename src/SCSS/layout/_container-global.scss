@@ -1,45 +1,3 @@
-* {
-  margin: 0;
-}
-
-:root{
-  --alert-red: #b22727;
-  --alert-green: #3c805c;
-}
-body {
-  -webkit-font-smoothing: antialiased;
-}
-/*
-   Improve media defaults
-*/
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
-/*
-   Avoid text overflows
-*/
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
-}
-/*
-  Create a root stacking context
-*/
-#root,
-#__next {
-  isolation: isolate;
-}
-
 .ct-section {
   width: 100%;
   background-size: cover;
@@ -61,7 +19,8 @@ h6 {
   margin-right: auto;
   height: 100%;
 }
-.ct-section-inner-wrap{
+.ct-section-inner-wrap,
+.oxy-header-container {
   max-width: 1280px;
 }
 .ct-section-inner-wrap {

@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @use "sass:math";
 
+
 @function __pixelify($value) {
   @if unit($value) == "px" {
     @return $value;
@@ -138,23 +139,16 @@
   @if map-has-key($map-for-font-formats, $file-formats) {
     @if index(eot woff2 woff ttf, $file-formats) {
       $src-value: url('#{$file-path}.#{if(not index(eot, $file-formats), $file-formats, $file-formats+"?#iefix")}')
-      #{map-get($map-for-font-formats, $file-formats)};
+        #{map-get($map-for-font-formats, $file-formats)};
       $list: append($list, $src-value, comma);
     } @else if index(svg, $file-formats) {
       $font-family: __clearWhitespace($font-family);
       $src-value: url('#{$file-path}.#{$file-formats + "#" + $font-family}')
-      #{map-get($map-for-font-formats, $file-formats)};
+        #{map-get($map-for-font-formats, $file-formats)};
       $list: append($list, $src-value, comma);
     }
   }
   @return $list;
-}
-@function __clearWhitespace($string) {
-  @while (str-index($string, " ") != null) {
-    $index: str-index($string, " ");
-    $string: "#{str-slice($string, 0, $index - 1)}#{str-slice($string, $index + 1)}";
-  }
-  @return $string;
 }
 
 @mixin gls-linear-gradient($direction, $colors) {
@@ -164,8 +158,8 @@
   }
   @if map-has-key($map-for-directions, $direction) {
     background: linear-gradient(
-                    map-get($map-for-directions, $direction),
-                    $list
+      map-get($map-for-directions, $direction),
+      $list
     );
   } @else if not map-has-key($map-for-directions, $direction) {
     @if not index("deg", unit($direction)) {
@@ -176,165 +170,165 @@
   }
 }
 $map-for-font-formats: (
-        "eot": format("embedded-opentype"),
-        "woff2": format("woff2"),
-        "woff": format("woff"),
-        "ttf": format("truetype"),
-        "svg": format("svg"),
+  "eot": format("embedded-opentype"),
+  "woff2": format("woff2"),
+  "woff": format("woff"),
+  "ttf": format("truetype"),
+  "svg": format("svg"),
 ) !default;
 
 $map-for-positions: (
-        "top": at top,
-        "top-right": at top right,
-        "right": at right,
-        "bottom-right": at bottom right,
-        "bottom": at bottom,
-        "bottom-left": at bottom left,
-        "left": at left,
-        "top-left": at top left,
-        "center": at center,
+  "top": at top,
+  "top-right": at top right,
+  "right": at right,
+  "bottom-right": at bottom right,
+  "bottom": at bottom,
+  "bottom-left": at bottom left,
+  "left": at left,
+  "top-left": at top left,
+  "center": at center,
 ) !default;
 
 $map-for-directions: (
-        "top": to top,
-        "top-right": to top right,
-        "right": to right,
-        "bottom-right": to bottom right,
-        "bottom": to bottom,
-        "bottom-left": to bottom left,
-        "left": to left,
-        "top-left": to top left,
+  "top": to top,
+  "top-right": to top right,
+  "right": to right,
+  "bottom-right": to bottom right,
+  "bottom": to bottom,
+  "bottom-left": to bottom left,
+  "left": to left,
+  "top-left": to top left,
 ) !default;
 
 $list-of-directions: (
-        "top",
-        "top-right",
-        "right",
-        "bottom-right",
-        "bottom",
-        "bottom-left",
-        "left",
-        "top-left"
+  "top",
+  "top-right",
+  "right",
+  "bottom-right",
+  "bottom",
+  "bottom-left",
+  "left",
+  "top-left"
 ) !default;
 
 $list-of-anchor-pseudo-classes: (
-        "link",
-        "visited",
-        "hover",
-        "active",
-        "focus"
+  "link",
+  "visited",
+  "hover",
+  "active",
+  "focus"
 ) !default;
 
 $list-of-buttons: (
-        "button",
-        "[type='button']",
-        "[type='reset']",
-        "[type='submit']"
+  "button",
+  "[type='button']",
+  "[type='reset']",
+  "[type='submit']"
 ) !default;
 
 $list-of-counter-styles: (
-        "arabic-indic",
-        "armenian",
-        "bengali",
-        "cambodian",
-        "circle",
-        "cjk-decimal",
-        "cjk-earthly-branch",
-        "cjk-heavenly-stem",
-        "decimal",
-        "decimal-leading-zero",
-        "devanagari",
-        "disc",
-        "disclosure-closed",
-        "disclosure-open",
-        "ethiopic-numeric",
-        "georgian",
-        "gujarati",
-        "gurmukhi",
-        "hebrew",
-        "hiragana",
-        "hiragana-iroha",
-        "japanese-formal",
-        "japanese-informal",
-        "kannada",
-        "katakana",
-        "katakana-iroha",
-        "khmer",
-        "korean-hangul-formal",
-        "korean-hanja-formal",
-        "korean-hanja-informal",
-        "lao",
-        "lower-alpha",
-        "lower-alpha",
-        "lower-armenian",
-        "lower-greek",
-        "lower-latin",
-        "lower-roman",
-        "malayalam",
-        "mongolian",
-        "myanmar",
-        "oriya",
-        "persian",
-        "simp-chinese-formal",
-        "simp-chinese-informal",
-        "square",
-        "tamil",
-        "telugu",
-        "thai",
-        "tibetan",
-        "trad-chinese-formal",
-        "trad-chinese-informal",
-        "upper-alpha",
-        "upper-armenian",
-        "upper-latin",
-        "upper-roman"
+  "arabic-indic",
+  "armenian",
+  "bengali",
+  "cambodian",
+  "circle",
+  "cjk-decimal",
+  "cjk-earthly-branch",
+  "cjk-heavenly-stem",
+  "decimal",
+  "decimal-leading-zero",
+  "devanagari",
+  "disc",
+  "disclosure-closed",
+  "disclosure-open",
+  "ethiopic-numeric",
+  "georgian",
+  "gujarati",
+  "gurmukhi",
+  "hebrew",
+  "hiragana",
+  "hiragana-iroha",
+  "japanese-formal",
+  "japanese-informal",
+  "kannada",
+  "katakana",
+  "katakana-iroha",
+  "khmer",
+  "korean-hangul-formal",
+  "korean-hanja-formal",
+  "korean-hanja-informal",
+  "lao",
+  "lower-alpha",
+  "lower-alpha",
+  "lower-armenian",
+  "lower-greek",
+  "lower-latin",
+  "lower-roman",
+  "malayalam",
+  "mongolian",
+  "myanmar",
+  "oriya",
+  "persian",
+  "simp-chinese-formal",
+  "simp-chinese-informal",
+  "square",
+  "tamil",
+  "telugu",
+  "thai",
+  "tibetan",
+  "trad-chinese-formal",
+  "trad-chinese-informal",
+  "upper-alpha",
+  "upper-armenian",
+  "upper-latin",
+  "upper-roman"
 ) !default;
 
 $list-of-absolute-length-units: (
-        "cm",
-        "mm",
-        "Q",
-        "in",
-        "pc",
-        "pt",
-        "px"
+  "cm",
+  "mm",
+  "Q",
+  "in",
+  "pc",
+  "pt",
+  "px"
 ) !default;
 
 $list-of-relative-length-units: (
-        "em",
-        "ex",
-        "ch",
-        "rem",
-        "lh",
-        "vw",
-        "vh",
-        "vmin",
-        "vmax"
+  "em",
+  "ex",
+  "ch",
+  "rem",
+  "lh",
+  "vw",
+  "vh",
+  "vmin",
+  "vmax"
 ) !default;
 
 $list-of-text-inputs: (
-        "[type='color']",
-        "[type='date']",
-        "[type='datetime']",
-        "[type='datetime-local']",
-        "[type='email']",
-        "[type='month']",
-        "[type='number']",
-        "[type='password']",
-        "[type='search']",
-        "[type='tel']",
-        "[type='text']",
-        "[type='time']",
-        "[type='url']",
-        "[type='week']",
-        "input:not([type])",
-        "textarea"
+  "[type='color']",
+  "[type='date']",
+  "[type='datetime']",
+  "[type='datetime-local']",
+  "[type='email']",
+  "[type='month']",
+  "[type='number']",
+  "[type='password']",
+  "[type='search']",
+  "[type='tel']",
+  "[type='text']",
+  "[type='time']",
+  "[type='url']",
+  "[type='week']",
+  "input:not([type])",
+  "textarea"
 ) !default;
 
 $map-for-breakpoints: (
-        "xsmall": 0,
-        "small": 480px,
-        "medium": 768px,
-        "large": 992px,
-        "xlarge": 1280px,
+  "xsmall": 0,
+  "small": 480px,
+  "medium": 768px,
+  "large": 992px,
+  "xlarge": 1280px,
 ) !default;
