@@ -3,45 +3,17 @@
 @use "../base/root" as *;
 
 @include breakpoint-to(wide) {
-  .team-card {
 
-    @include background;
-    margin: var(--space-m);
-  }
-  .team-card__image {
-    width: 100%;
-  }
 }
 
 @include breakpoint-to(large) {
-  .team-card {
 
-    @include background;
-    margin: var(--space-m);
-  }
-  .team-card__image {
-    width: 100%;
-  }
 }
 
 @include breakpoint-to(medium) {
-  .team-card {
 
-    @include background;
-    margin: var(--space-m);
-  }
-  .team-card__image {
-    width: 100%;
-  }
 }
 
 @include breakpoint-to(small) {
-  .team-card {
 
-    @include background;
-    margin: var(--space-m);
-  }
-  .team-card__image {
-    width: 100%;
-  }
 }

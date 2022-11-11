@@ -173,9 +173,9 @@
     @return default;
   }
   $color-brightness: round(
-    (red($n) * 299) + (green($n) * 587) + calc((blue($n) * 114) / 1000));
+                  (red($n) * 299) + (green($n) * 587) + calc((blue($n) * 114) / 1000));
   $light-color: round(
-    (red(#ffffff) * 299) + (green(#ffffff) * 587) + calc((blue(#ffffff) * 114) / 1000)
+                  (red(#ffffff) * 299) + (green(#ffffff) * 587) + calc((blue(#ffffff) * 114) / 1000)
   );
 
   @if abs($color-brightness) < calc($light-color / 2) {
@@ -190,9 +190,9 @@
     @return #ffffff;
   }
   $color-brightness: round(
-    (red($n) * 299) + (green($n) * 587) + calc((blue($n) * 114) / 1000));
+                  (red($n) * 299) + (green($n) * 587) + calc((blue($n) * 114) / 1000));
   $light-color: round(
-    (red(#ffffff) * 299) + (green(#ffffff) * 587) + calc((blue(#ffffff) * 114) / 1000)
+                  (red(#ffffff) * 299) + (green(#ffffff) * 587) + calc((blue(#ffffff) * 114) / 1000)
   );
 
   @if abs($color-brightness) < calc($light-color / 2) {
@@ -211,7 +211,7 @@
   $td-color: null
 ) {
   @if $table-style == "normal" {
-    @extend .table;
+    @extend .css-init-table;
     & tr {
       background: $tbody-bg;
     }
@@ -247,7 +247,7 @@
       }
     }
   } @else if $table-style == "trans" {
-    @extend .table-trans-th;
+    @extend .css-init-table-trans-th;
     & tr {
       background: $tbody-bg;
     }
@@ -266,8 +266,8 @@
       }
     }
   } @else if $table-style == "multi" {
-    @extend .table;
-    @extend .__multi;
+    @extend .css-init-table;
+    @extend .css-init-table__multi;
     & tr {
       background: $tbody-bg;
     }
@@ -303,8 +303,8 @@
       }
     }
   } @else if $table-style == "multi-trans" {
-    @extend .table-trans-th;
-    @extend .__multi;
+    @extend .css-init-table-trans-th;
+    @extend .css-init-table__multi;
     & tr {
       background: $tbody-bg;
     }
@@ -328,10 +328,10 @@
 /*  BREAKPOINTS */
 
 $breakpoints: (
-  small: 480px,
-  medium: 768px,
-  large: 992px,
-  wide: 1280px,
+        small: 480px,
+        medium: 768px,
+        large: 992px,
+        wide: 1280px,
 );
 @mixin breakpoint-to($name) {
   @if not map-has-key($breakpoints, $name) {

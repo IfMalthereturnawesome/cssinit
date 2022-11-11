@@ -1,7 +1,7 @@
 @use "../vendors/mixins-vendor" as *;
 @import "../abstract/scss-variables";
 
-.table {
+.css-init-table {
   table-layout: fixed;
   border-collapse: separate;
   width: 100%;
@@ -12,7 +12,7 @@
     font-size: $text-m;
     background: $white;
     box-shadow: rgb(0 0 0 / 2%) 0px 1px 3px 0px,
-      rgb(27 31 35 / 15%) 0px 0px 0px 1px;
+    rgb(27 31 35 / 15%) 0px 0px 0px 1px;
   }
   & th {
     padding: $space-s;
@@ -31,7 +31,7 @@
     min-height: $space-s;
   }
 }
-.table-trans-th {
+.css-init-table-trans-th {
   table-layout: fixed;
   border-collapse: separate;
   width: 100%;
@@ -42,7 +42,7 @@
     font-size: $text-m;
     background: $white;
     box-shadow: rgb(0 0 0 / 2%) 0px 1px 3px 0px,
-      rgb(27 31 35 / 15%) 0px 0px 0px 1px;
+    rgb(27 31 35 / 15%) 0px 0px 0px 1px;
   }
   & thead tr {
     background-color: transparent;
@@ -66,7 +66,7 @@
   }
 }
 
-.__multi {
+.css-init-table__multi {
   & td {
     @include only(1, 2) {
       padding: revert;
