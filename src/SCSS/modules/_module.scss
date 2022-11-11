@@ -2,17 +2,31 @@
 @use "../abstract/global" as *;
 @use "../abstract/other-global" as *;
 @import "../abstract/scss-variables";
+@import "help-classes";
 
 
-// mixin color contrast for background and text with button and link styles included
+@mixin center($direction: all) {
+  @if $direction==all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } @else if $direction==horizontal {
+    display: flex;
+    justify-content: center;
+  } @else if $direction==vertical {
+    display: flex;
+    align-items: center;
+  }
+}
+
 @mixin background($contrast: "primary") {
   @if $contrast == "primary" {
-    background-color: var(--primary);
+    background-color: $primary;
     color: var(--white);
     // Make the button background color different color
     &__link,
     &__button {
-      background-color: var(--secondary);
+      background-color: $secondary;
       color: var(--secondary-ultra-light);
     }
   } @else if $contrast == "black" {
@@ -138,22 +152,6 @@
   }
 }
 
-
-@mixin center($direction: all) {
-  @if $direction==all {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } @else if $direction==horizontal {
-    display: flex;
-    justify-content: center;
-  } @else if $direction==vertical {
-    display: flex;
-    align-items: center;
-  }
-}
-
-
 @mixin input-validation($input) {
   @if $input == valid {
     border: 1.5px solid var(--alert-green);
@@ -166,6 +164,165 @@
   } @else {
     border-style: none;
     background-color: var(--white);
+  }
+}
+
+@function __text-contrast($n) {
+  @if ($n == null) {
+    @return default;
+  }
+  $color-brightness: round(
+                  (red($n) * 299) + (green($n) * 587) + (blue($n) * 114) / 1000
+  );
+  $light-color: round(
+                  (red(#ffffff) * 299) + (green(#ffffff) * 587) + (blue(#ffffff) * 114) / 1000
+  );
+
+  @if abs($color-brightness) < ($light-color/2) {
+    @return #ffffff;
+  } @else {
+    @return #00000f;
+  }
+}
+
+@function __text-contrast-th($n) {
+  @if ($n == null) {
+    @return #ffffff;
+  }
+  $color-brightness: round(
+                  (red($n) * 299) + (green($n) * 587) + (blue($n) * 114) / 1000
+  );
+  $light-color: round(
+                  (red(#ffffff) * 299) + (green(#ffffff) * 587) + (blue(#ffffff) * 114) / 1000
+  );
+
+  @if abs($color-brightness) < ($light-color/2) {
+    @return #ffffff;
+  } @else {
+    @return #00000f;
+  }
+}
+
+// Mixin for table styling
+@mixin table(
+  $table-style: "normal",
+  $thead-bg: null,
+  $tbody-bg: null,
+  $th-color: null,
+  $td-color: null
+) {
+  @if $table-style == "normal" {
+    @extend .table;
+    & tr {
+      background: $tbody-bg;
+    }
+    & th {
+      background: $thead-bg;
+    }
+    @if $td-color != null {
+      & td {
+        color: $td-color;
+      }
+    } @else if __text-contrast($tbody-bg) == #ffffff {
+      & td {
+        // contrast color to the background color of tbody ;
+        color: $white;
+      }
+    } @else {
+      & td {
+        color: $black;
+      }
+    }
+    @if $th-color != null {
+      & th {
+        color: $th-color;
+      }
+    } @else if __text-contrast-th($thead-bg) == #ffffff {
+      & th {
+        // contrast color to the background color of tbody ;
+        color: $primary-ultra-light;
+      }
+    } @else {
+      & th {
+        color: $primary-ultra-dark;
+      }
+    }
+  } @else if $table-style == "trans" {
+    @extend .table-trans-th;
+    & tr {
+      background: $tbody-bg;
+    }
+    @if $td-color != null {
+      & td {
+        color: $td-color;
+      }
+    } @else if __text-contrast($tbody-bg) == #ffffff {
+      & td {
+        // contrast color to the background color of tbody ;
+        color: $white;
+      }
+    } @else {
+      & td {
+        color: $black;
+      }
+    }
+  } @else if $table-style == "multi" {
+    @extend .table;
+    @extend .__multi;
+    & tr {
+      background: $tbody-bg;
+    }
+    & th {
+      background: $thead-bg;
+    }
+    @if $td-color != null {
+      & td {
+        color: $td-color;
+      }
+    } @else if __text-contrast($tbody-bg) == #ffffff {
+      & td {
+        // contrast color to the background color of tbody ;
+        color: $white;
+      }
+    } @else {
+      & td {
+        color: $black;
+      }
+    }
+    @if $th-color != null {
+      & td {
+        color: $th-color;
+      }
+    } @else if __text-contrast-th($thead-bg) == #ffffff {
+      & th {
+        // contrast color to the background color of tbody ;
+        color: $primary-ultra-light;
+      }
+    } @else {
+      & th {
+        color: $primary-ultra-dark;
+      }
+    }
+  } @else if $table-style == "multi-trans" {
+    @extend .table-trans-th;
+    @extend .__multi;
+    & tr {
+      background: $tbody-bg;
+    }
+    @if $td-color != null {
+      & td {
+        color: $td-color;
+      }
+    } @else if __text-contrast($tbody-bg) == #ffffff {
+      & td {
+        // contrast color to the background color of tbody ;
+        color: $white;
+      }
+    } @else {
+      & td {
+        color: $black;
+      }
+    }
   }
 }
 
@@ -187,7 +344,7 @@ $breakpoints: (
   }
 }
 
-@mixin mf-breakpoint-from($name) {
+@mixin mf-breakpoint($name) {
   @if not map-has-key($breakpoints, $name) {
     @warn "Warning: `#{$name}` is not a valid breakpoint name.";
   } @else {
